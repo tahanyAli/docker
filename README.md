@@ -33,13 +33,13 @@ python manage.py migrate
 
 ### admin.py
 
-    ```python
+```python
      from django.contrib import admin
      from .models import Posts
      # Register your models here.
 
      admin.site.register(Posts)
-    ```
+```
 ### settings.py
 
 * not secure way 
@@ -51,7 +51,8 @@ python manage.py migrate
      }
     ```
 ### urls.py for project
-    ```python
+
+```python
      from django.contrib import admin
      from django.urls import path, include
 
@@ -59,9 +60,10 @@ python manage.py migrate
           path('admin/', admin.site.urls),
           path('api/v1/posts/', include('posts.urls')),
      ]
-    ```
+```
 ### urls.py for app
-    ```python
+
+```python
      from django.urls import path
      from .views import PostList, PostDetail
 
@@ -69,4 +71,4 @@ python manage.py migrate
         path('', PostList.as_view(), name='post_list'),
         path('<int:pk>/', PostDetail.as_view(), name='post_detail'),
      ]
-     ```
+```
