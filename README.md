@@ -21,6 +21,19 @@ poetry add djangorestframework
 ### create your model
 python manage.py makemigrations
 python manage.py migrate
+
+poetry export -f requirements.txt -o requirements.txt --without-hashes
+
+docker-compose up --build
+docker-compose up -d
+##or
+docker rm docker_web_1
+docker rmi docker_web
+
+
+## finally
+docker container stop $(docker container ls -a -q); docker system prune -a -f --volumes
+docker-compose down
 ```
 ### INSTALLED_APPS in settings.py
 ```python
@@ -113,3 +126,53 @@ class PostDetail(generics.RetrieveAPIView):
     queryset = Posts.objects.all()
     serializer_class = PostSerializer
 ```
+
+### important commands
+
+```bash
+##first commands =>
+
+docker-compose up --build 
+
+docker-compose up -d
+
+##or
+docker-compose up -d --build
+
+##a command to convert pyproject.toml dependencies to requirements.txt
+
+poetry export -f requirements.txt -o requirements.txt
+
+
+##to load the dependencies that in the requirements.txt  file
+
+pip install -r requirements.txt
+
+###################
+docker-compose run web python manage.py migrate
+
+docker container stop $(docker container ls -a -q); docker system prune -a -f --volumes
+
+docker-compose down
+
+```
+
+
+* To change Remote origin repo on (Github)
+
+```bash
+git remote -v
+git remote set-url origin NEW_URL
+```
+
+### Error
+
+``ImportError: Couldn't import Django. Are you sure it's installed and available on your PYTHONPATH environment variable? Did you forget to activate a virtual environment?``
+
+### solve:
+
+``poetry export -f requirements.txt -o requirements.txt --without-hashes``
+
+### PORT 
+
+``http://127.0.0.1:8001/api/v1/posts/``
