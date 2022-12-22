@@ -14,6 +14,8 @@ poetry init -n
 poetry shell
 poetry add django && poetry add --dev black flake8
 django-admin startproject blog_api_project .
+docker-compose run --rm web python manage.py makemigrations
+docker-compose run --rm web python manage.py migrate
 docker python manage.py migrate
 python manage.py startapp posts
 python manage.py createsuperuser --email=tahany@ltuc.com --username=admin
